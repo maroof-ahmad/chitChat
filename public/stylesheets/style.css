@@ -1,0 +1,51 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h1{
+	margin-top: 0;
+    color: #d60808;
+    text-decoration: underline;
+}
+
+a {
+  color: #00B7FF;
+}
+p {
+    font-weight: bold;
+}
+
+#message{
+	border: solid 1px #eee;
+    padding: 8px 20px 8px 20px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    width: 300px;
+    margin: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 70%;
+    margin-left: 100px;
+}
+
+#sendbutton{
+	background: #d60808;
+    border: none;
+    color: #ffffff;
+    padding: 9px 24px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    border-radius: 0 3px 3px 0;
+    position: fixed;
+    right: 110px;
+    bottom: 0;
+    margin: 10px;
+}
+#messagearea{
+    min-height: 300px;
+    border: solid 1px #eee;
+    max-height: 1000px;
+    overflow-y: scroll;
+    margin: 0 70px 0 50px;
+}
