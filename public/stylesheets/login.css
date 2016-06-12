@@ -1,0 +1,26 @@
+
+h2{
+	text-transform: uppercase;
+	color: #ff6347;
+}
+div{
+	position: absolute;
+	top:30%;
+	left:50%;
+	transform: translate(-50%, -30%);
+}
+#username{
+	border: solid 1px grey;
+    padding: 8px 20px 8px 20px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+    margin-right: 20px;
+    text-transform: uppercase;
+}
+#submitButton{
+	padding: 9px 24px;
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);;
+    background-color: #ff6347;
+    text-transform: uppercase;
+    border-radius: 0 3px 3px 0;
+}

@@ -45,7 +45,23 @@ p {
 #messagearea{
     min-height: 300px;
     border: solid 1px #eee;
-    max-height: 1000px;
+    max-height: 450px;
     overflow-y: scroll;
     margin: 0 70px 0 50px;
+    width: 700px;
+    float: left;
+}
+#list{
+    padding: 10px;
+
+}
+#users{
+    background-color: aqua;
+    width: 300px;
+    min-height: 300px;
+    border: solid 1px #eee;
+    max-height: 450px;
+    float: right;
+    margin-right: 100px;
+    overflow-y: scroll;
 }

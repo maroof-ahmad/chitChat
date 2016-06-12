@@ -13,7 +13,8 @@
 <body ng-controller = "mainController">
     <h1>chitChat</h1>
     <p>Welcome to chitChat</p>
-    <div id="messagearea"></div>
+    <div id="messagearea"><p ng-repeat="message in messages" id="list">{{message}}</p></div>
+    <div id="users"></div>
     <input id="message" type="text" ng-model="message"></input>
     <input id="sendbutton" type="button" value="send message" ng-click= "sendMessage(message)"></input>
 </body>

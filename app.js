@@ -18,6 +18,10 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
   console.log('user connected');
+  socket.on('new message', function(data){
+    console.log(data);
+    io.emit('new message',data);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   })
