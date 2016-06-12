@@ -1,0 +1,27 @@
+{
+  "name": "chitchat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Maroof Ahmad <ahmadmaroof8@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/maroof-ahmad/chitChat",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/dist",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "jquery": "1.9.1 - 2"
+  },
+  "dependencies": {
+    "angular": "^1.5.6",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0",
+    "angular-socket-io": "^0.7.0"
+  }
+}
