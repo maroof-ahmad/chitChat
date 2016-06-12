@@ -9,11 +9,12 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-var io = require('socket.io');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 // var io = socket.io;
 
 // console.log(socket);
-console.log(io);
+// console.log(io);
 
 io.on('connection', function(socket){
   console.log('user connected');
@@ -69,7 +70,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = {
-app:   app,
-io: io
-};
+module.exports = {app: app, server: server};
