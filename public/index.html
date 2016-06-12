@@ -2,19 +2,19 @@
 <html ng-app = "chitChat">
   <head>
     <title>chitChat</title>
-    <script src="./dist/angular/angular.min.js"></script>
-    <script src="./dist/jquery/dist/jquery.min.js"></script>
+    <script src="./dist/angular/angular.js"></script>
+    <script src="./dist/jquery/dist/jquery.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="./dist/angular-socket-io/socket.js"></script>
     <link rel="stylesheet" type="text/css" href="./dist/bootstrap/dist/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="./javascripts/app.js"></script>
   </head>
 <body ng-controller = "mainController">
     <h1>chitChat</h1>
     <p>Welcome to chitChat</p>
     <div id="messagearea"></div>
-    <input id="message" type="text">
-    <input id="sendbutton" type="button" value="send message">
-
-  
-
+    <input id="message" type="text" ng-model="message"></input>
+    <input id="sendbutton" type="button" value="send message" ng-click= "sendMessage(message)"></input>
 </body>
 </html>

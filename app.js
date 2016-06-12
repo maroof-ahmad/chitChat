@@ -9,6 +9,18 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var io = require('socket.io');
+// var io = socket.io;
+
+// console.log(socket);
+console.log(io);
+
+io.on('connection', function(socket){
+  console.log('user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  })
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -57,4 +69,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = {
+app:   app,
+io: io
+};
