@@ -1,0 +1,11 @@
+<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+<div ng-controller = "mainController">
+	<div id="heading">
+    	<h1>chitChat</h1>
+    	<p>Welcome to chitChat</p>
+	</div>
+    <div id="messagearea"><p class = "myusers" ng-repeat="message in messages" id="list">{{message}}</p></div>
+    <div id="users"><p ng-repeat="user in users">{{user}}</p></div>
+    <input id="message" type="text" ng-model="message"></input>
+    <input id="sendbutton" type="button" value="send message" ng-click= "sendMessage(message)"></input>
+</div>

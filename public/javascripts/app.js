@@ -1,10 +1,42 @@
-var app = angular.module('chitChat', ['btford.socket-io']);
+var app = angular.module('chitChat', ['btford.socket-io', 'ngRoute']);
+app.config(function($routeProvider){
+	$routeProvider
+	.when('/', {
+		templateUrl : './login.html',
+		controller : 'loginController'
+	})
+	.when('/chat',{
+		templateUrl : './chat.html',
+		controller : 'mainController'
+	})
+	.otherwise('/');
+});
 app.factory('socket', function(socketFactory){
 	return socketFactory();
 });
-app.controller('mainController', ['$scope','socket', function($scope,socket){
+// app.factory('users', function(){
+// 	var users=[];
+// 	return {
+// 		userlist:users
+// 	}
+// });
+app.controller('mainController', ['$scope','$http', 'socket', function($scope,$http,socket){
+
 	$scope.message="";
 	$scope.messages = [];
+	$scope.users = [];
+	$http({
+		method: 'GET',
+		url: '/instantiate'
+	}).then(function successCallback(res){
+		$scope.messages = res.data.messages;
+		$scope.users = res.data.users;
+		// console.log($scope.messages);
+		// console.log($scope.users);
+
+	}, function errorCallback(err){
+		console.log(err);
+	});
 	$scope.sendMessage = function(data){
 		console.log(data);
 		socket.emit('new message',{message: data})
@@ -12,11 +44,37 @@ app.controller('mainController', ['$scope','socket', function($scope,socket){
 	}
 	socket.on('new message',function(data){
 		console.log(data);
+		console.log($scope);
 		$scope.messages.push(data.message);
 		console.log($scope.messages);
 
 	});
+	socket.on('user',function(users){
+		$scope.$apply(function(){$scope.users = users});
+		console.log("users " + users);
+	});
 
+}]);
+app.controller('loginController', ['$scope', 'socket', '$location',function($scope,socket,$location){
+	$scope.changeView = function(){
+		if(!$scope.username){
+			alert("username can't be empty");
+			$location.path('/');
+		}
+		else{
+			console.log("username in login Controller" + $scope.username);
+			socket.emit('new user', $scope.username, function(data){
+				if(data) {
+					$location.path('/chat');
+					$scope.username='';
+
+				}else{	
+					alert("use another username as "+$scope.username+" is already taken");
+				}
+			});
+			
+		}
+	}
 }]);
 // app.controller('mainController', ['$scope',function($scope){
 // 	$scope.message="";

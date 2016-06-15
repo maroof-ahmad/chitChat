@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>login</title>
-		<link rel="stylesheet" type="text/css" href="./stylesheets/login.css">
-	</head>
-	<body>
-		<div>
-			<h2>Enter your Username</h2>
-			<input id="username" type="text" placeholder="username"></input>
-			<input id="submitButton" type="button" value="enter"></input>
-		</div>
-	</body>
-</html>
+<link rel="stylesheet" type="text/css" href="./stylesheets/login.css">
+<div id="loginbox">
+	<h2>Enter your Username</h2>
+	<input id="username" type="text" placeholder="username" ng-model="username"></input>
+	<input id="submitButton" type="button" value="enter" ng-click = 'changeView()'></input>
+</div>

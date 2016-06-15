@@ -16,17 +16,6 @@ var io = require('socket.io')(server);
 // console.log(socket);
 // console.log(io);
 
-io.on('connection', function(socket){
-  console.log('user connected');
-  socket.on('new message', function(data){
-    console.log(data);
-    io.emit('new message',data);
-  });
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  })
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,7 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-
+app.get('/instantiate',function(req,res){
+  console.log(req);
+  var response = {messages: messages, users: users};
+  console.log(response);
+  res.send(response);
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -49,6 +43,39 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+var users = [];
+var messages = [];
+
+
+io.on('connection', function(socket){
+  console.log('user connected');
+  socket.on('new message', function(data){
+    console.log(data);
+    messages.push(data.message);
+    io.emit('new message',data);
+  });
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+  socket.on('new user',function(data,callback){
+    // console.log(data);
+    // console.log(callback);
+    if(users.indexOf(data) == -1){
+
+      users.push(data);
+      console.log(users);
+      callback(true);
+      setTimeout(function(){
+
+      io.emit('user',users);
+    },1000);
+    }
+    else{
+      console.log("false was called");  
+      callback(false)
+    }
+  });
+});
 // error handlers
 
 // development error handler

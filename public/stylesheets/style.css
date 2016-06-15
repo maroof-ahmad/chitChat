@@ -7,6 +7,9 @@ h1{
     color: #d60808;
     text-decoration: underline;
 }
+#heading{
+    margin-left: 50px;
+}
 
 a {
   color: #00B7FF;
@@ -50,18 +53,24 @@ p {
     margin: 0 70px 0 50px;
     width: 700px;
     float: left;
+    border-radius: 13px;
 }
 #list{
     padding: 10px;
 
 }
 #users{
-    background-color: aqua;
+    background-color: darksalmon;
     width: 300px;
     min-height: 300px;
-    border: solid 1px #eee;
+    border-radius: 13px;
     max-height: 450px;
     float: right;
     margin-right: 100px;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+.myusers{
+    padding: 20px 0 0 20px;
+    margin: 10px 0 0 10px
+
 }

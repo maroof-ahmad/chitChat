@@ -3,7 +3,7 @@ h2{
 	text-transform: uppercase;
 	color: #ff6347;
 }
-div{
+#loginbox{
 	position: absolute;
 	top:30%;
 	left:50%;
