@@ -4,15 +4,14 @@ body {
 }
 h1{
 	margin-top: 0;
-    color: #d60808;
-    text-decoration: underline;
+    color: #2196F3;
 }
 #heading{
     margin-left: 50px;
 }
 
 a {
-  color: #00B7FF;
+  color: #2196F3;
 }
 p {
     font-weight: bold;
@@ -32,7 +31,7 @@ p {
 }
 
 #sendbutton{
-	background: #d60808;
+	background: #2196F3;
     border: none;
     color: #ffffff;
     padding: 9px 24px;
@@ -49,28 +48,31 @@ p {
     min-height: 300px;
     border: solid 1px #eee;
     max-height: 450px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 0 70px 0 50px;
     width: 700px;
     float: left;
-    border-radius: 13px;
+    border-radius: 4px;
+    background-color: #fafafa;
 }
 #list{
-    padding: 10px;
+    padding-left: 10px;
+    margin: 10px 4px;
 
 }
 #users{
-    background-color: darksalmon;
+    background-color: #fafafa;
+    border: solid 1px #eee;
     width: 300px;
     min-height: 300px;
-    border-radius: 13px;
+    border-radius: 4px;
     max-height: 450px;
     float: right;
     margin-right: 100px;
     overflow-y: auto;
 }
 .myusers{
-    padding: 20px 0 0 20px;
-    margin: 10px 0 0 10px
+    padding: 5px 0 0 10px;
+    margin: 10px 0 0 0;
 
 }

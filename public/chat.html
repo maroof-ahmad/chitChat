@@ -4,8 +4,8 @@
     	<h1>chitChat</h1>
     	<p>Welcome to chitChat</p>
 	</div>
-    <div id="messagearea"><p class = "myusers" ng-repeat="message in messages" id="list">{{message}}</p></div>
-    <div id="users"><p ng-repeat="user in users">{{user}}</p></div>
-    <input id="message" type="text" ng-model="message"></input>
+    <div id="messagearea"><p  ng-repeat="message in messages track by $index" id="list"><strong style="color:#2196F3">{{message.username}} : </strong> {{message.message}}</p></div>
+    <div id="users"><p class = "myusers" ng-repeat="user in users ">{{user}}</p></div>
+    <input id="message" type="text" ng-model="message" ng-keyup="$event.keyCode == 13 && sendMessage(message)"></input>
     <input id="sendbutton" type="button" value="send message" ng-click= "sendMessage(message)"></input>
 </div>

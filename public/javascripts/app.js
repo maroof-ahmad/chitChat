@@ -25,6 +25,7 @@ app.controller('mainController', ['$scope','$http', 'socket', function($scope,$h
 	$scope.message="";
 	$scope.messages = [];
 	$scope.users = [];
+	$scope.username = socket.username;
 	$http({
 		method: 'GET',
 		url: '/instantiate'
@@ -39,13 +40,13 @@ app.controller('mainController', ['$scope','$http', 'socket', function($scope,$h
 	});
 	$scope.sendMessage = function(data){
 		console.log(data);
-		socket.emit('new message',{message: data})
+		socket.emit('new message',{username: $scope.username, message: data})
 		$scope.message='';
 	}
 	socket.on('new message',function(data){
 		console.log(data);
-		console.log($scope);
-		$scope.messages.push(data.message);
+		// console.log($scope);
+		$scope.messages.push(data);
 		console.log($scope.messages);
 
 	});
@@ -65,6 +66,7 @@ app.controller('loginController', ['$scope', 'socket', '$location',function($sco
 			console.log("username in login Controller" + $scope.username);
 			socket.emit('new user', $scope.username, function(data){
 				if(data) {
+					socket.username = $scope.username;
 					$location.path('/chat');
 					$scope.username='';
 

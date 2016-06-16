@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="./stylesheets/login.css">
 <div id="loginbox">
 	<h2>Enter your Username</h2>
-	<input id="username" type="text" placeholder="username" ng-model="username"></input>
+	<input id="username" type="text" placeholder="username" ng-model="username" ng-keyup="$event.keyCode == 13 && changeView()"></input>
 	<input id="submitButton" type="button" value="enter" ng-click = 'changeView()'></input>
 </div>

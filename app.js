@@ -31,9 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.get('/instantiate',function(req,res){
-  console.log(req);
+  // console.log(req);
   var response = {messages: messages, users: users};
-  console.log(response);
+  // console.log(response);
   res.send(response);
 });
 // catch 404 and forward to error handler
@@ -51,7 +51,7 @@ io.on('connection', function(socket){
   console.log('user connected');
   socket.on('new message', function(data){
     console.log(data);
-    messages.push(data.message);
+    messages.push(data);
     io.emit('new message',data);
   });
   socket.on('disconnect', function(){
@@ -65,10 +65,7 @@ io.on('connection', function(socket){
       users.push(data);
       console.log(users);
       callback(true);
-      setTimeout(function(){
-
       io.emit('user',users);
-    },1000);
     }
     else{
       console.log("false was called");  
