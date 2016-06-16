@@ -14,13 +14,28 @@ app.config(function($routeProvider){
 app.factory('socket', function(socketFactory){
 	return socketFactory();
 });
+app.directive('schrollBottom', function () {
+  return {
+    scope: {
+      schrollBottom: "="
+    },
+    link: function (scope, element) {
+      scope.$watchCollection('schrollBottom', function (newValue) {
+        if (newValue)
+        {
+          $(element).scrollTop($(element)[0].scrollHeight);
+        }
+      });
+    }
+  }
+})
 // app.factory('users', function(){
 // 	var users=[];
 // 	return {
 // 		userlist:users
 // 	}
 // });
-app.controller('mainController', ['$scope','$http', 'socket', function($scope,$http,socket){
+app.controller('mainController', ['$scope','$http', 'socket', '$anchorScroll', '$location', function($scope,$http,socket,$anchorScroll,$location){
 
 	$scope.message="";
 	$scope.messages = [];
@@ -38,6 +53,10 @@ app.controller('mainController', ['$scope','$http', 'socket', function($scope,$h
 	}, function errorCallback(err){
 		console.log(err);
 	});
+
+	$location.hash("messagearea");
+	$anchorScroll();
+
 	$scope.sendMessage = function(data){
 		console.log(data);
 		socket.emit('new message',{username: $scope.username, message: data})
@@ -48,6 +67,8 @@ app.controller('mainController', ['$scope','$http', 'socket', function($scope,$h
 		// console.log($scope);
 		$scope.messages.push(data);
 		console.log($scope.messages);
+		$location.hash("messagearea");
+		$anchorScroll();
 
 	});
 	socket.on('user',function(users){
