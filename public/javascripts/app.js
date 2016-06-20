@@ -35,7 +35,7 @@ app.directive('schrollBottom', function () {
 // 		userlist:users
 // 	}
 // });
-app.controller('mainController', ['$scope','$http', 'socket', '$anchorScroll', '$location', function($scope,$http,socket,$anchorScroll,$location){
+app.controller('mainController', ['$scope','$http', 'socket', '$location', function($scope,$http,socket,$location){
 
 	$scope.message="";
 	$scope.messages = [];
@@ -54,9 +54,6 @@ app.controller('mainController', ['$scope','$http', 'socket', '$anchorScroll', '
 		console.log(err);
 	});
 
-	$location.hash("messagearea");
-	$anchorScroll();
-
 	$scope.sendMessage = function(data){
 		console.log(data);
 		socket.emit('new message',{username: $scope.username, message: data})
@@ -67,8 +64,6 @@ app.controller('mainController', ['$scope','$http', 'socket', '$anchorScroll', '
 		// console.log($scope);
 		$scope.messages.push(data);
 		console.log($scope.messages);
-		$location.hash("messagearea");
-		$anchorScroll();
 
 	});
 	socket.on('user',function(users){

@@ -56,6 +56,10 @@ io.on('connection', function(socket){
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    var user = socket.username;
+    var index = users.indexOf(user);
+    users.splice(index,1);
+    io.emit('user',users);
   });
   socket.on('new user',function(data,callback){
     // console.log(data);
