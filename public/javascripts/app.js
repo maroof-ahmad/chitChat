@@ -41,6 +41,12 @@ app.controller('mainController', ['$scope','$http', 'socket', '$location', funct
 	$scope.messages = [];
 	$scope.users = [];
 	$scope.username = socket.username;
+
+	if(socket.username == undefined){
+		$location.path('/');
+	}
+	console.log("current socket user "+ socket.username);
+	console.log("current socket user $scope "+ $scope.username);
 	$http({
 		method: 'GET',
 		url: '/instantiate'
@@ -55,20 +61,20 @@ app.controller('mainController', ['$scope','$http', 'socket', '$location', funct
 	});
 
 	$scope.sendMessage = function(data){
-		console.log(data);
+		//console.log(data);
 		socket.emit('new message',{username: $scope.username, message: data})
 		$scope.message='';
 	}
 	socket.on('new message',function(data){
-		console.log(data);
+		//console.log(data);
 		// console.log($scope);
 		$scope.messages.push(data);
-		console.log($scope.messages);
+		//console.log($scope.messages);
 
 	});
 	socket.on('user',function(users){
 		$scope.$apply(function(){$scope.users = users});
-		console.log("users " + users);
+		//console.log("users " + users);
 	});
 
 }]);
