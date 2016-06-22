@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -11,6 +13,14 @@ var users = require('./routes/users');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+mongoose.connect("mongodb://127.0.0.1:27017/test");
+
+var chatSchema = mongoose.Schema({
+  username : String,
+  message : String
+});
+var Chat = mongoose.model('Chat',chatSchema);
 // var io = socket.io;
 
 // console.log(socket);
@@ -19,6 +29,7 @@ var io = require('socket.io')(server);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -30,11 +41,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+var users = [];
+
 app.get('/instantiate',function(req,res){
   // console.log(req);
-  var response = {messages: messages, users: users};
-  // console.log(response);
-  res.send(response);
+  var messages = [];
+  Chat.find(function(err,data){
+    if(err){
+      console.log(err);
+    } else {
+      //console.log("data is "+data)
+      messages = data;
+      var response = {messages: messages, users: users};
+      console.log("response is " + response);
+      res.send(response);
+    }
+  })
+  
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,16 +66,22 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-var users = [];
-var messages = [];
+// var messages = [];
 
 
 io.on('connection', function(socket){
   console.log('user connected');
   socket.on('new message', function(data){
     console.log(data);
-    messages.push(data);
-    io.emit('new message',data);
+    var chat = new Chat({username:data.username, message: data.message});
+    chat.save(function(err,data){
+      if(err) return console.log(err);
+      else {
+        console.log("data "+data);
+        io.emit('new message',data);
+      }
+    });
+    
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
